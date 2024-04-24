@@ -16,7 +16,7 @@ typedef struct LinkNode {
 	struct LinkNode* link; // 자체 참조 구조체
 } Node;
 
-Node* top = NULL; // 마지막 노드 (NULL 값으로 초기화)
+Node* top = NULL; // 
 
 void error(const char* str)
 {
@@ -38,8 +38,8 @@ int size()
 
 void push(Element e)
 {
-	Node* p = (Node*)malloc(sizeof(Node));
-	p->data = e;
+	Node* p = (Node*)malloc(sizeof(Node));  // 동적 메모리 할당 (Node 구조체 동적 생성)
+	p->data = e; // 생성한 노드에 데이터 삽입
 
 	p->link = top;
 	top = p;
