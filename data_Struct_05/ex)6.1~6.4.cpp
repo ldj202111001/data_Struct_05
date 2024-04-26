@@ -26,15 +26,16 @@ int is_full() { return length == MAX_LIST_SIZE; }
 int get_entry(int id) { return data[id]; }
 void replace(int id, Element e) { data[id] = e; }
 int size() { return length; }
-void insert(int pos, int e) 
+
+void insert(int pos, int e)  // 삽입 연산 (매개변수: 삽입할 위치, 삽입할 값)
 {
 	int i;
-	if (is_full() == 0 && pos >= 0 && pos <= length)
+	if (is_full() == 0 && pos >= 0 && pos <= length) // 포화상태가 아닐때 and 배열의 처음이 아닐때 and 배열의 끝이 아닐때
 	{
-		for (i = length; i > pos; i--)
+		for (i = length; i > pos; i--) // 삽입할 위치 바로 뒤에 있는 데이터들을 모두 한칸씩 뒤로 미루기
 			data[i] = data[i - 1];
-		data[pos] = e;
-		length++;
+		data[pos] = e; // 삽입할 위치에 데이터 삽입
+		length++; // 길이도 늘려주기
 	}
 
 	else error("포화상태 오류 또는 삽입 위치 오류");
@@ -42,12 +43,12 @@ void insert(int pos, int e)
 void delete_(int pos) 
 {
 	int i;
-	if (is_empty() == 0 && pos >= 0 && pos < length)
+	if (is_empty() == 0 && pos >= 0 && pos < length) // 공백상태가 아닐때 and 배열의 처음이 아닐때 and 배열의 끝이 아닐때
 	{
-		for (i = pos+1; i < length; i++)
+		for (i = pos+1; i < length; i++) // 삭제한 위치로 데이트들을 한칸씩 당겨주기
 			data[i-1] = data[i];
 		
-		length--;
+		length--; // 길이도 줄여주기
 	}
 
 	else error("공백상태 오류 또는 삭제 위치 오류");
@@ -66,7 +67,7 @@ void print_list(const char* msg)
 	int i;
 	printf("%s[%2d]: ", msg, length);
 	for (i = 0; i < length; i++)
-		printf("%2d", data[i]);
+		printf(" %2d ", data[i]);
 	printf("\n");
 }
 
@@ -92,3 +93,25 @@ void main()
 	print_list("배열로 구현한 List(정리후)");
 
 }
+
+/*
+* 추가할 메뉴
+* f - 검색
+* c - 바꾸기
+* 
+* 수정할 메뉴
+* q - 종료
+* 
+* 검색 메뉴 예시
+* 검색 문자열 입력: computer
+* 
+* 0 computer
+* 4 department of computer
+* 
+* 바꾸기 메뉴 예시
+* 검색 문자열 입력 computer
+* 바꿀 문자열 입력 electrical engineering
+* 
+* (리스트에 수정된 내용이 있을 경우)
+* 수정한 내용이 있습니다. 파일에 저장하시겟습니까?
+*/  // 프로그램은 실습과제로 추가한거는 과제로 제출
